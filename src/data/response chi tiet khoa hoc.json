@@ -1,0 +1,122 @@
+{
+    "id": 2299,
+    "name": "Session 03 - Kỹ thuật đặt Prompt căn bản",
+    "status": false,
+    "position": 3,
+    "type": "LÝ THUYẾT",
+    "createdBy": null,
+    "createdAt": "2026-06-08T08:12:29.665Z",
+    "updatedAt": "2026-06-15T15:35:27.000Z",
+    "updatedBy": null,
+    "mindmap": "https://drive.google.com/file/d/1nfoz33baT-MSrDurleaKXjUQhyQgqVlJ/view?usp=sharing",
+    "srs": null,
+    "miniProject": null,
+    "pdf": "",
+    "exercise": null,
+    "quizzi": null,
+    "practiceEntranceQuiz": "",
+    "isShowMindmap": false,
+    "description": null,
+    "homework": [
+        {
+            "id": 9287,
+            "position": 6861
+        },
+        {
+            "id": 9288,
+            "position": 6862
+        },
+        {
+            "id": 9289,
+            "position": 6863
+        },
+        {
+            "id": 9290,
+            "position": 6864
+        },
+        {
+            "id": 9291,
+            "position": 6865
+        }
+    ],
+    "practiceExercise": [
+        {
+            "id": 333
+        }
+    ],
+    "lessons": [
+        {
+            "id": 5216,
+            "name": "Prompt là gì? Vì sao nó quan trọng hơn bạn nghĩ?",
+            "videoUrl": "https://www.youtube.com/watch?v=60nUjnc4uWw",
+            "durationTime": 209,
+            "assignments": [
+                {
+                    "id": 1354
+                }
+            ],
+            "videoSuccess": true,
+            "quizzSuccess": true,
+            "documentSuccess": true,
+            "completed": true
+        },
+        {
+            "id": 5217,
+            "name": "5 thành phần tạo nên Prompt chuẩn và hiệu quả",
+            "videoUrl": "https://www.youtube.com/watch?v=ZT3ORwEi-Kk",
+            "durationTime": 254,
+            "assignments": [
+                {
+                    "id": 1355
+                }
+            ],
+            "videoSuccess": false,
+            "quizzSuccess": false,
+            "documentSuccess": false,
+            "completed": false
+        },
+        {
+            "id": 5218,
+            "name": "Viết prompt cho các nhu cầu học tập, tóm tắt, giải thích, liệt kê",
+            "videoUrl": "https://www.youtube.com/watch?v=8jqcGVEnaCw",
+            "durationTime": 313,
+            "assignments": [
+                {
+                    "id": 1356
+                }
+            ],
+            "videoSuccess": false,
+            "quizzSuccess": false,
+            "documentSuccess": false,
+            "completed": false
+        },
+        {
+            "id": 5219,
+            "name": "Kỹ thuật Prompt lặp và tối ưu (Iterative Prompting)",
+            "videoUrl": "https://www.youtube.com/watch?v=igyy7wNslvI",
+            "durationTime": 160,
+            "assignments": [
+                {
+                    "id": 1358
+                }
+            ],
+            "videoSuccess": false,
+            "quizzSuccess": false,
+            "documentSuccess": false,
+            "completed": false
+        }
+    ],
+    "success": false,
+    "quizzes": [
+        {
+            "id": 386,
+            "title": "[Quizz Đầu Giờ] - Session 03 - Kỹ thuật đặt Prompt căn bản",
+            "description": "Quizz Đầu GIờ"
+        },
+        {
+            "id": 387,
+            "title": "[Quizz Cuối Giờ] - Session 03 - Kỹ thuật đặt Prompt căn bản",
+            "description": "Quizz Cuối Giờ"
+        }
+    ]
+}
