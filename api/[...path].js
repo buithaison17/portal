@@ -1,8 +1,17 @@
 export default async function handler(req, res) {
     try {
         // ===== 1. REWRITE PATH =====
-        const path = req.query.path?.join("/") || "";
-        const targetUrl = `https://apiportal.rikkei.edu.vn/${path}`;
+        let path = req.query.path || "";
+        if (Array.isArray(path)) {
+            path = path.join("/");
+        }
+        
+        // Forward any query parameters (except the proxy 'path' parameter itself)
+        const urlObj = new URL(req.url, "http://localhost");
+        const queryParams = urlObj.searchParams;
+        queryParams.delete("path");
+        const queryString = queryParams.toString();
+        const targetUrl = `https://apiportal.rikkei.edu.vn/${path}${queryString ? `?${queryString}` : ""}`;
 
         // ===== 2. HEADERS =====
         const incomingHeaders = { ...req.headers };
