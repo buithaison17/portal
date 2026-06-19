@@ -2,7 +2,11 @@
     "rewrites": [
         {
             "source": "/api/:path*",
-            "destination": "https://apiportal.rikkei.edu.vn/:path*"
+            "destination": "/api/[...path]"
+        },
+        {
+            "source": "/((?!api/).*)",
+            "destination": "/index.html"
         }
     ]
 }
