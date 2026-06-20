@@ -5,6 +5,10 @@ import { useCourseDetailStore } from "../store/courseDetailStore";
 import { useCourseStore } from "../store/courseStore";
 import { useProcessVideo } from "../store/videoProcess";
 import { ArrowLeft, BookOpen, GraduationCap, Award, Sparkles } from "lucide-react";
+import { useLessionStore } from "../store/lessionStore";
+import { useDocumentStore } from "../store/documentStore";
+import { useQuizStore } from "../store/quizStore";
+import { message } from "antd";
 
 const CourseDetail: React.FC = () => {
     const { id } = useParams();
@@ -24,6 +28,9 @@ const CourseDetail: React.FC = () => {
     const courseName = course ? course.name : "Chi tiết khóa học";
     const totalLesson = course ? course.hour : "";
 
+    const loadLession = useLessionStore((state) => state.loadLession);
+    const submitDocument = useDocumentStore((state) => state.submitDocument);
+    const submitQuiz = useQuizStore((state) => state.submitQuiz);
     const [unlockingSessionId, setUnlockingSessionId] = useState<number | null>(null);
 
     useEffect(() => {
@@ -42,15 +49,37 @@ const CourseDetail: React.FC = () => {
             const lessonIds = session.lessons.map((lesson: any) => lesson.id);
             // Process each lesson video sequentially
             for (const lid of lessonIds) {
+                // Hoàn thành video bài học
                 await processVideo(lid);
+                // Lấy ra các bài đọc và hoàn thành
+                const lesson = await loadLession(lid);
+                const documentList = lesson.questionDocuments.map((q: any) => {
+                    return {
+                        questionId: q.id,
+                        answer: q.answer
+                    }
+                })
+                // Duyệt bài đọc
+                for (const doc of documentList) {
+                    await submitDocument(doc);
+                }
+                // Lấy đáp án đúng
+                const correctAns = lesson.assignments[0].questions.map((q: any) => {
+                    return {
+                        questionId: q.id,
+                        answerId: q.answers.find((a: any) => a.isCorrect).id
+                    }
+                })
+                // Submit quizz
+                await submitQuiz(0, String(lesson.assignments[0].id), String(lid), correctAns);
             }
-
             // Reload details to reflect new completion states
             if (id) {
                 await loadCourseDetails(Number(id));
+                message.success("Mở khoá học thành công")
             }
         } catch (error: any) {
-            console.error("Lỗi khi mở khóa session:", error);
+            message.error("Lỗi khi mở khóa session:", error);
         } finally {
             setUnlockingSessionId(null);
         }
