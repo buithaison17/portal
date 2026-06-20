@@ -5,10 +5,11 @@ interface LessionCardProps {
     title: string;
     success: boolean;
     onClick: () => void;
+    onViewAssignments?: () => void;
     loading?: boolean;
 }
 
-const SessionCard: React.FC<LessionCardProps> = ({ title, success, onClick, loading = false }) => {
+const SessionCard: React.FC<LessionCardProps> = ({ title, success, onClick, onViewAssignments, loading = false }) => {
     return (
         <div className={`flex flex-col sm:flex-row items-start sm:items-center justify-between rounded-2xl bg-white p-5 border border-slate-100 shadow-xs hover:shadow-md transition-all duration-200 gap-4 ${success ? "border-l-4 border-l-emerald-500" : "border-l-4 border-l-slate-300"}`}>
             <div className="flex items-center gap-3.5">
@@ -29,7 +30,18 @@ const SessionCard: React.FC<LessionCardProps> = ({ title, success, onClick, load
                 </div>
             </div>
 
-            <div className="self-stretch sm:self-auto flex items-center justify-end">
+            <div className="self-stretch sm:self-auto flex items-center justify-end gap-2">
+                {onViewAssignments && (
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onViewAssignments();
+                        }}
+                        className="w-full sm:w-auto px-4 py-2 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs border border-slate-200 rounded-xl transition duration-150 flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
+                    >
+                        Xem bài tập
+                    </button>
+                )}
                 {success ? (
                     <button className="w-full sm:w-auto px-4 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-semibold text-xs rounded-xl transition duration-150 flex items-center justify-center gap-1.5 cursor-pointer">
                         Đã nộp bài

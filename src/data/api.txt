@@ -4,3 +4,4 @@ Hoàn thành video: https://apiportal.rikkei.edu.vn/process-video
 Hoàn thành bài đọc: https://apiportal.rikkei.edu.vn/answer-question-document
 Hoàn thành quizz: https://apiportal.rikkei.edu.vn/grades
 Lấy chi tiết bài học: https://apiportal.rikkei.edu.vn/lessons/student/5216
+Nộp bài tập :https://apiportal.rikkei.edu.vn/exercise/me

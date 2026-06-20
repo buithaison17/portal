@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import SessionCard from "../components/SessionCard";
 import { useCourseDetailStore } from "../store/courseDetailStore";
 import { useCourseStore } from "../store/courseStore";
@@ -12,6 +12,7 @@ import { message } from "antd";
 
 const CourseDetail: React.FC = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const loadCourseDetails = useCourseDetailStore(
         (state) => state.loadCourseDetails,
     );
@@ -172,6 +173,7 @@ const CourseDetail: React.FC = () => {
                                     success={session.success}
                                     loading={unlockingSessionId === session.id}
                                     onClick={() => handleUnlockSession(session.id)}
+                                    onViewAssignments={() => navigate(`/courses/${id}/sessions/${session.id}/assignments`)}
                                 />
                             ))}
                         </div>
