@@ -6,7 +6,7 @@ interface QuizState {
     submitQuiz: (totalPoint: number, assignmentId: string, lessonId: string, answers: any[]) => Promise<void>;
 }
 
-export const useQuizStore = create<QuizState>((set) => ({
+export const useQuizStore = create<QuizState>((_set) => ({
     submitQuiz: async (totalPoint: number, assignmentId: string, lessonId: string, answers: any[]) => {
         try {
             const token = useTokenStore.getState().token?.portalToken;
