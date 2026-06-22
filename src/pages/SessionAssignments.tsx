@@ -3,16 +3,16 @@ import { useParams, Link } from "react-router-dom";
 import { useCourseDetailStore } from "../store/courseDetailStore";
 import { useHomeworkStore } from "../store/homeworkStore";
 import { useTokenStore } from "../store/tokenStore";
-import { 
-    ArrowLeft, 
-    BookOpen, 
-    Code, 
-    Award, 
-    Upload, 
-    Folder, 
-    CheckCircle2, 
-    Loader2, 
-    X, 
+import {
+    ArrowLeft,
+    BookOpen,
+    Code,
+    Award,
+    Upload,
+    Folder,
+    CheckCircle2,
+    Loader2,
+    X,
     FileText,
     Sparkles,
     ChevronDown,
@@ -32,7 +32,7 @@ interface AssignmentItem {
 
 const SessionAssignments: React.FC = () => {
     const { courseId, sessionId } = useParams();
-    
+
     const loadCourseDetails = useCourseDetailStore((state) => state.loadCourseDetails);
     const courseDetails = useCourseDetailStore((state) => state.courseDetails);
     const loadingDetails = useCourseDetailStore((state) => state.loading);
@@ -41,7 +41,7 @@ const SessionAssignments: React.FC = () => {
     const homeworkList = useHomeworkStore((state) => state.homeworkList);
     const loadingHomework = useHomeworkStore((state) => state.loading);
     const loadHomeworkList = useHomeworkStore((state) => state.loadHomeworkList);
-    
+
     const [expandedHwIds, setExpandedHwIds] = useState<number[]>([]);
 
     // Submission states
@@ -53,7 +53,7 @@ const SessionAssignments: React.FC = () => {
     const [uploading, setUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [uploadStatus, setUploadStatus] = useState("");
-    
+
     // Persistent submission status
     const [submittedIds, setSubmittedIds] = useState<number[]>(() => {
         try {
@@ -140,7 +140,7 @@ const SessionAssignments: React.FC = () => {
     };
 
     const toggleExpandHw = (id: number) => {
-        setExpandedHwIds((prev) => 
+        setExpandedHwIds((prev) =>
             prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
         );
     };
@@ -263,7 +263,7 @@ const SessionAssignments: React.FC = () => {
             if (submittingAssignment) {
                 const newSubmitted = [...submittedIds, submittingAssignment.id];
                 setSubmittedIds(newSubmitted);
-                localStorage.setItem("submitted_assignment_ids", JSON.stringify(newSubmitted));
+                // localStorage.setItem("submitted_assignment_ids", JSON.stringify(newSubmitted));
                 message.success(`Nộp thành công bài tập: ${submittingAssignment.title}`);
             }
 
@@ -320,7 +320,7 @@ const SessionAssignments: React.FC = () => {
     return (
         <div className="min-h-screen bg-slate-50 font-sans pb-12">
             <div className="mx-auto max-w-5xl p-4 md:p-8 space-y-6">
-                
+
                 {/* Back button */}
                 <Link
                     to={`/courses/${courseId}`}
@@ -353,7 +353,7 @@ const SessionAssignments: React.FC = () => {
                             <div className="h-44 md:h-48 bg-gradient-to-r from-blue-600 to-indigo-700 relative overflow-hidden flex items-end p-6 md:p-8 text-white">
                                 <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
                                 <div className="absolute top-[-40%] right-[-10%] w-72 h-72 bg-white/10 rounded-full blur-3xl" />
-                                
+
                                 <div className="z-10 space-y-2">
                                     <span className="inline-flex items-center gap-1 rounded-full bg-white/15 backdrop-blur-md px-3 py-1 text-xs font-semibold tracking-wide border border-white/10">
                                         Bài tập của Session
@@ -396,11 +396,10 @@ const SessionAssignments: React.FC = () => {
                                         const isSubmitted = submittedIds.includes(item.id);
                                         const isExpanded = expandedHwIds.includes(item.id);
                                         return (
-                                            <div 
-                                                key={item.id} 
-                                                className={`flex flex-col rounded-2xl bg-white p-5 border border-slate-100 shadow-xs hover:shadow-md transition-all duration-200 gap-4 ${
-                                                    isSubmitted ? "border-l-4 border-l-emerald-500" : "border-l-4 border-l-blue-500"
-                                                }`}
+                                            <div
+                                                key={item.id}
+                                                className={`flex flex-col rounded-2xl bg-white p-5 border border-slate-100 shadow-xs hover:shadow-md transition-all duration-200 gap-4 ${isSubmitted ? "border-l-4 border-l-emerald-500" : "border-l-4 border-l-blue-500"
+                                                    }`}
                                             >
                                                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 w-full">
                                                     <div className="flex items-start gap-3.5">
@@ -465,7 +464,7 @@ const SessionAssignments: React.FC = () => {
 
                                                 {/* Expanded Description */}
                                                 {isExpanded && item.description && (
-                                                    <div 
+                                                    <div
                                                         className="mt-2 p-4 md:p-5 bg-slate-50 border border-slate-100 rounded-xl text-xs text-slate-700 leading-relaxed overflow-x-auto select-text prose max-w-none shadow-inner"
                                                         dangerouslySetInnerHTML={{ __html: item.description }}
                                                     />
@@ -484,7 +483,7 @@ const SessionAssignments: React.FC = () => {
             {submittingAssignment && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-fade-in">
                     <div className="relative w-full max-w-lg overflow-hidden rounded-3xl bg-white border border-slate-100 p-6 md:p-8 shadow-2xl animate-scale-up space-y-6">
-                        
+
                         {/* Modal Header */}
                         <div className="flex items-center justify-between border-b border-slate-50 pb-4">
                             <div>
@@ -536,11 +535,10 @@ const SessionAssignments: React.FC = () => {
                                             type="button"
                                             disabled={uploading}
                                             onClick={() => handleSwitchMode("folder")}
-                                            className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-bold transition-all duration-150 ${
-                                                selectMode === "folder"
-                                                    ? "bg-white text-blue-600 shadow-sm"
-                                                    : "text-slate-500 hover:text-slate-700"
-                                            }`}
+                                            className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-bold transition-all duration-150 ${selectMode === "folder"
+                                                ? "bg-white text-blue-600 shadow-sm"
+                                                : "text-slate-500 hover:text-slate-700"
+                                                }`}
                                         >
                                             <Folder size={11} />
                                             Chọn folder
@@ -549,11 +547,10 @@ const SessionAssignments: React.FC = () => {
                                             type="button"
                                             disabled={uploading}
                                             onClick={() => handleSwitchMode("files")}
-                                            className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-bold transition-all duration-150 ${
-                                                selectMode === "files"
-                                                    ? "bg-white text-blue-600 shadow-sm"
-                                                    : "text-slate-500 hover:text-slate-700"
-                                            }`}
+                                            className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-bold transition-all duration-150 ${selectMode === "files"
+                                                ? "bg-white text-blue-600 shadow-sm"
+                                                : "text-slate-500 hover:text-slate-700"
+                                                }`}
                                         >
                                             <FileText size={11} />
                                             Chọn file
@@ -583,15 +580,13 @@ const SessionAssignments: React.FC = () => {
                                 {/* Dropzone */}
                                 <div
                                     onClick={() => !uploading && triggerSelect()}
-                                    className={`border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition duration-150 flex flex-col items-center justify-center gap-3 ${
-                                        selectedFolderFiles
-                                            ? "border-blue-500 bg-blue-50/30 hover:bg-blue-50/50"
-                                            : "border-slate-200 hover:border-slate-300 hover:bg-slate-50/50"
-                                    } ${uploading ? "opacity-60 cursor-not-allowed" : ""}`}
+                                    className={`border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition duration-150 flex flex-col items-center justify-center gap-3 ${selectedFolderFiles
+                                        ? "border-blue-500 bg-blue-50/30 hover:bg-blue-50/50"
+                                        : "border-slate-200 hover:border-slate-300 hover:bg-slate-50/50"
+                                        } ${uploading ? "opacity-60 cursor-not-allowed" : ""}`}
                                 >
-                                    <div className={`flex h-12 w-12 items-center justify-center rounded-2xl transition ${
-                                        selectedFolderFiles ? "bg-blue-500 text-white" : "bg-slate-50 text-slate-400"
-                                    }`}>
+                                    <div className={`flex h-12 w-12 items-center justify-center rounded-2xl transition ${selectedFolderFiles ? "bg-blue-500 text-white" : "bg-slate-50 text-slate-400"
+                                        }`}>
                                         {selectedFolderFiles
                                             ? (selectMode === "folder" ? <Folder size={24} /> : <FileText size={24} />)
                                             : <Upload size={24} />}
@@ -659,9 +654,8 @@ const SessionAssignments: React.FC = () => {
                                 </button>
                                 <button
                                     type="submit"
-                                    className={`px-5 py-2.5 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-bold text-xs rounded-xl transition duration-150 flex items-center justify-center gap-1.5 cursor-pointer shadow-md shadow-blue-500/10 ${
-                                        uploading ? "opacity-75 cursor-not-allowed" : ""
-                                    }`}
+                                    className={`px-5 py-2.5 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-bold text-xs rounded-xl transition duration-150 flex items-center justify-center gap-1.5 cursor-pointer shadow-md shadow-blue-500/10 ${uploading ? "opacity-75 cursor-not-allowed" : ""
+                                        }`}
                                     disabled={uploading}
                                 >
                                     {uploading ? (
