@@ -20,8 +20,14 @@ export const useCourseStore = create<CourseState>((set) => ({
                     Authorization: `Bearer ${token}`,
                 },
             });
+
+            let data: any[] = response.data.data.system.specializes[0].semesters
+            if (data.length === 0) {
+                data = response.data.data.system.specializes[2].semesters
+            }
+
             set({
-                semesters: response.data.data.system.specializes[0].semesters,
+                semesters: data,
                 studentId: response.data.data.id,
             });
             console.log(response.data);
