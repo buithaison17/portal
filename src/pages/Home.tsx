@@ -51,6 +51,8 @@ const Home: React.FC = () => {
             portalToken: input.portalToken,
             githubToken: input.githubToken,
         });
+        // Save to local storage
+        localStorage.setItem("token", JSON.stringify(input));
         await loadCourse(input.portalToken);
         setShowConfig(false);
     };

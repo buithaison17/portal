@@ -12,7 +12,7 @@ interface TokenState {
 }
 
 export const useTokenStore = create<TokenState>((set) => ({
-    token: null,
+    token: JSON.parse(localStorage.getItem("token") || "null"),
     loading: false,
     setToken: (token) => {
         set({ token });
